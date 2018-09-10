@@ -1,11 +1,18 @@
-owners = []
+import json
 
-TOKEN = 'NDc3MTkwMzgyOTM4MjI2Njg4.Dk4j_A.e_23QtPUrkQCRmdmq7BgQJYLSJM'
+with open('config.json', 'r') as f:
+    config = json.load(f)
 
-description = '''L!no is here!'''
+host = config['host']
 
-prefix = '>>'
+owners = config['owners']
 
-toogleall = 0
+TOKEN = config['token']
 
-invite_link = "https://discordapp.com/oauth2/authorize?client_id=477190382938226688&scope=bot&permissions=470166598"
+description = config['desc']
+
+prefix = config['prefix']
+
+toogleall = config['logall']
+
+invite_link = config['invite']

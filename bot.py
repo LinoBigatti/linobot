@@ -222,12 +222,24 @@ async def top(ctx, cur : str):
 	await bot.say(top)
 
 @bot.command(pass_context=True)
-async def iamowner(ctx):
-	"""are you a bot owner?"""
-	x = input("authorize " + str(ctx.message.author) + ", ID " + str(ctx.message.author.id) + " to be bot owner? [Y/N] ")
-	if x == "Y":
-		owners.append(ctx.message.author.id)
+async def addowner(ctx):
+	"""add an owner."""
+	if ctx.message.author.id == host:
+		owners.append(ctx.message.mentions[0].id)
 		await bot.say("Enjoy your owner!")
+	else:
+		await bot.say("fuck you men, you arent the bot owner!")
+
+@bot.command(pass_context=True)
+async def delowner(ctx):
+	"""removes an owner."""
+	if ctx.message.author.id == host:
+                try:
+                        c = owners.index(ctx.message.mentions[0].id)
+                        owners.pop(c)
+                        await bot.say("Success")
+                except IndexError:
+                        await bot.say(str(ctx.message.mentions[0]) + " isnt an owner.")
 	else:
 		await bot.say("fuck you men, you arent the bot owner!")
 
